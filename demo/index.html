@@ -1,0 +1,169 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>paper-dropdown-menu Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../paper-dropdown-menu.html">
+    <link rel="import" href="../../paper-material/paper-material.html">
+    <link rel="import" href="../../paper-item/paper-item.html">
+    <link rel="import" href="../../paper-button/paper-button.html">
+    <link rel="import" href="../../iron-icons/iron-icons.html">
+    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="../../paper-toolbar/paper-toolbar.html">
+    <style type="text/css">
+      
+      body {
+        background-color: #fafafa;
+        font-family: "Roboto","Noto",sans-serif;
+        font-size: 14px;
+        margin: 0;
+        padding: 24px;
+      }
+      
+      paper-dropdown-menu {
+        display: block;
+      }
+      
+      paper-item {
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      
+      .right paper-dropdown-overlay {
+        left: auto;
+        right: 0;
+      }
+      
+      .bottom paper-dropdown-overlay {
+        top: auto;
+        bottom: 0;
+      }
+      
+      .button-example {
+        margin: 150px 50px 0;
+        width: 200px;
+        float: left;
+      }
+      
+      paper-button {
+        width: 200px;
+      }
+      
+    </style>
+  </head>
+  <body onclick="clickHandler(event);">
+
+	<template is="dom-bind" id="template">
+
+      <paper-toolbar justify="justified">
+        <div class="">
+          <paper-icon-button icon="chevron-right"></paper-icon-button>
+          <paper-dropdown-menu>
+            <paper-material>
+              <paper-menu selected="{{selected}}">
+                <paper-item>Item 0</paper-item>
+                <paper-item>Item 1</paper-item>
+                <paper-item>Item 2</paper-item>
+              </paper-menu>
+            </paper-material>
+          </paper-dropdown-menu>
+        </div>
+        <div class="">
+          <paper-icon-button icon="chevron-left"></paper-icon-button>
+          <paper-dropdown-menu class="right">
+            <paper-material>
+              <paper-menu selected="{{selected}}">
+                <paper-item>Item 0</paper-item>
+                <paper-item>Item 1</paper-item>
+                <paper-item>Item 2</paper-item>
+              </paper-menu>
+            </paper-material>
+          </paper-dropdown-menu>
+        </div>
+      </paper-toolbar>
+  
+      <div>
+
+        <div class="button-example">
+          <paper-button raised>Top Left -> <span>[[selected]]</span></paper-button>
+          <paper-dropdown-menu>
+            <paper-material>
+              <paper-menu selected="{{selected}}">
+                <paper-item>Item 0</paper-item>
+                <paper-item>Item 1</paper-item>
+                <paper-item>Item 2</paper-item>
+              </paper-menu>
+            </paper-material>
+          </paper-dropdown-menu>
+        </div>
+        
+        <div class="button-example">
+          <paper-dropdown-menu class="bottom">
+            <paper-material>
+              <paper-menu selected="{{selected}}">
+                <paper-item>Item 0</paper-item>
+                <paper-item>Item 1</paper-item>
+                <paper-item>Item 2</paper-item>
+              </paper-menu>
+            </paper-material>
+          </paper-dropdown-menu>
+          <paper-button raised>Bottom Left -> <span>[[selected]]</span></paper-button>
+        </div>
+        
+        <div class="button-example">
+          <paper-button raised>Top Right -> <span>[[selected]]</span></paper-button>
+          <paper-dropdown-menu class="right">
+            <paper-material>
+              <paper-menu selected="{{selected}}">
+                <paper-item>Item 0</paper-item>
+                <paper-item>Item 1</paper-item>
+                <paper-item>Item 2</paper-item>
+              </paper-menu>
+            </paper-material>
+          </paper-dropdown-menu>
+        </div>
+    
+        <div class="button-example">
+          <paper-dropdown-menu class="bottom right">
+            <paper-material>
+              <paper-menu selected="{{selected}}">
+                <paper-item>Item 0</paper-item>
+                <paper-item>Item 1</paper-item>
+                <paper-item>Item 2</paper-item>
+              </paper-menu>
+            </paper-material>
+          </paper-dropdown-menu>
+          <paper-button raised>Bottom Right -> <span>[[selected]]</span></paper-button>
+        </div>
+          
+      </div>
+      
+      <script>
+	
+        function clickHandler(event) {
+          var target = Polymer.dom(event).localTarget;
+          if(target.tagName != 'PAPER-BUTTON' && target.tagName != 'PAPER-ICON-BUTTON') {
+            return;
+          }
+          var parent = Polymer.dom(target).parentNode;
+          var dropdown = Polymer.dom(parent).querySelector('paper-dropdown-menu');
+          dropdown.open();
+        }
+	
+      </script>
+	    
+    </template>
+
+  </body>
+</html>

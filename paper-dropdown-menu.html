@@ -1,0 +1,89 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="paper-dropdown-overlay.html">
+<link rel="import" href="../paper-menu/paper-menu.html">
+
+<!--
+An element used for wrapping a paper-menu with an overlay, making it a dropdown.
+By default the dropdown is aligned to top left. Use CSS that targets the paper-dropdown-overlay
+element to change the alignment using the "top", "bottom", "left" and "right" attributes.
+
+Example:
+
+    <paper-dropdown-menu>
+   	  <paper-menu>
+   	    <paper-item>Item 1</paper-item>
+   	    <paper-item>Item 2</paper-item>
+   	    <paper-item>Item 3</paper-item>
+   	  </paper-menu>
+    </paper-dropdown-menu>
+
+@demo demo/index.html
+-->
+<dom-module id="paper-dropdown-menu">
+
+  <style>
+  
+    :host {
+      position: relative;
+    }
+    
+    :host paper-menu {
+      display: inline-block;
+    }
+    
+    paper-dropdown-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+  </style>
+
+  <template>
+  	<paper-dropdown-overlay overlay id="dropdownOverlay">
+    	<content></content>
+   	</paper-dropdown-overlay>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'paper-dropdown-menu',
+    
+    properties: {
+      
+    },
+    
+    open: function() {
+      this.$.dropdownOverlay.open();
+    },
+    
+    close: function() {
+      this.$.dropdownOverlay.close();
+    },
+
+    ready: function() {
+      
+      this.async(function() {
+    	var activateEvent = Polymer.dom(this).querySelector('paper-menu').activateEvent;
+    	Polymer.dom(this).querySelector('paper-menu').addEventListener(activateEvent, (function() {
+      	  this.close();
+        }).bind(this));
+      });
+    }
+
+  });
+
+</script>
