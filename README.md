@@ -1,3 +1,5 @@
+*This project is no longer maintained. Please use the official paper-dropdown-menu implementation at https://github.com/polymerelements/paper-dropdown-menu*
+
 # paper-dropdown-menu
 
 An element used for wrapping a `paper-menu` with an overlay, making it a dropdown.
